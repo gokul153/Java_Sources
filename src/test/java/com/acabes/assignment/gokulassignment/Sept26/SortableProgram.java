@@ -8,7 +8,7 @@ class QuickSort{
 
         quickSort(arr, 0, n - 1);
 
-        System.out.println("Sorted array:");
+        System.out.println("Sorted array in Quick Sort:");
         for (int num : arr) {
             System.out.print(num + " ");
         }
@@ -43,7 +43,7 @@ class  MergeSort{
     void sort(int arr[]){
         mergeSort(arr);
 
-        System.out.println("Sorted array:");
+        System.out.println("Sorted array in Merge Sort:");
         for (int num : arr) {
             System.out.print(num + " ");
         }
@@ -86,4 +86,11 @@ class  MergeSort{
     }
 }
 public class SortableProgram {
+    public  static  void main(String[] args){
+        MergeSort sr=new MergeSort();
+        QuickSort qr=new QuickSort();
+        int[] Ar={2,3,17,5,6,15};
+        sr.sort(Ar);
+        qr.sort(Ar);
+    }
 }
