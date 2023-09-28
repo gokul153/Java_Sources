@@ -33,10 +33,27 @@ class FlightClass extends Passenger{
             this.seatalignment.add(i,1);
         }
     }
+    public void cancelParticularSeat(int seatno,int flightNumber){
+        try{
+            if (seatalignment.get(seatno) != 0) {
+                System.out.println("Seat Number:"+seatno+" is not booked kindly check the seat");
+
+            } else {
+                System.out.println("Seat no" + seatno + " is booked");
+                System.out.println("Cancelled "+seatno);
+            }
+
+        }catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Enter a seat within limit");
+            System.out.println(e);
+
+        }
+    }
   public void bookparticularseat(int seatno,int flightNumber){
         try{
       if (seatalignment.get(seatno) == 1) {
           System.out.println("Seat AVailable at seat no" + seatno);
+          seatalignment.set(seatno,0);
 
       } else {
           System.out.println("Seat no" + seatno + " already booked by someone else");
@@ -49,23 +66,28 @@ class FlightClass extends Passenger{
     public void bookSeat(int number_Of_Seat,int flightNumber){
         bookFlight();
         Scanner sc=new Scanner(System.in);
-        if(number_Of_Seat>0){
-            if (seats.get(flightNumber)>number_Of_Seat) {
-                int existing=seats.get(flightNumber)-number_Of_Seat;
-                seats.add(flightNumber,existing);
-                int j=0;
-                do {
-                    System.out.println("Enter the seat "+j+" no");
-                    int seatno = sc.nextInt();
-                    bookparticularseat(seatno,flightNumber);
-                     j++;
-                }while (j>=number_Of_Seat);
-                System.out.println("Booking Successfull!");
-            }
-            else {
-                System.out.println("Insufficient Seat!");
-            }
+        if(number_Of_Seat>0) {
+            try {
+                if (seats.get(flightNumber) > number_Of_Seat) {
+                    int existing = seats.get(flightNumber) - number_Of_Seat;
+                    seats.add(flightNumber, existing);
+                    int j = 0;
+                    do {
+                        System.out.println("Enter the seat  no :" + j + "th seat");
+                        int seatno = sc.nextInt();
+                        bookparticularseat(seatno, flightNumber);
+                        j++;
+                    } while (j < number_Of_Seat);
 
+                    System.out.println("Booking Successfull!");
+                } else {
+                    System.out.println("Insufficient Seat!");
+                }
+
+            }catch (ArrayIndexOutOfBoundsException e){
+                System.out.println("Enter Flight no is seqentioal order");
+                System.out.println(e);
+        }
         }
 
     }
@@ -77,9 +99,16 @@ class FlightClass extends Passenger{
     public void cancelSeat(int number_Of_Seat,int flightNumber){
         cancelFlight();
         if(number_Of_Seat>0){
-
+            Scanner sc=new Scanner(System.in);
             int existing=seats.get(flightNumber)+number_Of_Seat;
             seats.add(flightNumber,existing);
+            int j=0;
+            do {
+                System.out.println("Enter the seat  no :"+j+"th seat");
+                int seatno = sc.nextInt();
+                cancelParticularSeat(seatno,flightNumber);
+                j++;
+            }while (j<number_Of_Seat);
             System.out.println("Cancel Successfull!");
 
 
@@ -93,9 +122,11 @@ public class Flightbooking {
   public static void main(String[] args){
       Scanner sc = new Scanner(System.in);
       char input_intial1='a';
+      int token=0;
       do {
-          System.out.println("Enter the Flight number");
-          int flight_number = sc.nextInt();
+
+          int flight_number = token;
+          System.out.println("Flight number is"+flight_number);
           System.out.println("Enter the number of seats");
           int seat = sc.nextInt();
           System.out.println("Current Flight no is" + flight_number);
@@ -119,6 +150,7 @@ public class Flightbooking {
            }
           System.out.println("Enter q to quit ");
           input_intial1= sc.next().charAt(0);
+          token++;
       }while (input_intial1!='q');
 
 
