@@ -25,18 +25,41 @@ class Passenger implements  BookingSystem{
 class FlightClass extends Passenger{
     int flightNumber;
     ArrayList<Integer> seats= new ArrayList<Integer>();
-
+    ArrayList<Integer> seatalignment= new ArrayList<Integer>();
     FlightClass(int flightNumber,int seats){
         this.flightNumber=flightNumber;
         this.seats.add(flightNumber,seats);
+        for(int i=0;i<seats;i++) {
+            this.seatalignment.add(i,1);
+        }
     }
+  public void bookparticularseat(int seatno,int flightNumber){
+        try{
+      if (seatalignment.get(seatno) == 1) {
+          System.out.println("Seat AVailable at seat no" + seatno);
 
+      } else {
+          System.out.println("Seat no" + seatno + " already booked by someone else");
+      }
+        }catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Enter a number less than that of seat limit");
+            System.out.println(e);
+        }
+  }
     public void bookSeat(int number_Of_Seat,int flightNumber){
         bookFlight();
+        Scanner sc=new Scanner(System.in);
         if(number_Of_Seat>0){
             if (seats.get(flightNumber)>number_Of_Seat) {
                 int existing=seats.get(flightNumber)-number_Of_Seat;
                 seats.add(flightNumber,existing);
+                int j=0;
+                do {
+                    System.out.println("Enter the seat "+j+" no");
+                    int seatno = sc.nextInt();
+                    bookparticularseat(seatno,flightNumber);
+                     j++;
+                }while (j>=number_Of_Seat);
                 System.out.println("Booking Successfull!");
             }
             else {
