@@ -1,10 +1,7 @@
 package com.acabes.assignment.gokulassignment.Sept27;
 
 import java.io.Serial;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.ServiceConfigurationError;
+import java.util.*;
 
 interface BookingSystem{
     void bookFlight();
@@ -36,14 +33,19 @@ class FlightClass extends Passenger{
     public void cancelParticularSeat(int seatno,int flightNumber){
         try{
             if (seatalignment.get(seatno) != 0) {
-                System.out.println("Seat Number:"+seatno+" is not booked kindly check the seat");
+                throw new NoSeatException();
+             //   System.out.println("Seat Number:"+seatno+" is not booked kindly check the seat");
 
             } else {
                 System.out.println("Seat no" + seatno + " is booked");
                 System.out.println("Cancelled "+seatno);
             }
 
-        }catch (ArrayIndexOutOfBoundsException e){
+        }
+        catch (NoSeatException e){
+            e.printBuisnessError();
+        }
+        catch (ArrayIndexOutOfBoundsException e){
             System.out.println("Enter a seat within limit");
             System.out.println(e);
 

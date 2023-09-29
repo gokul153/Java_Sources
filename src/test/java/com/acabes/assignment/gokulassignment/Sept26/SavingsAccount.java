@@ -25,7 +25,7 @@ class SavingsAccount extends BankAccount {
                 System.out.println("SavingsAccount Balance is:" + balance);
 
             } catch (InsuffientBalance e) {
-                e.getdetail();
+               // e.getdetail();
                 e.printBuisnessError();
             }
         }catch (InvalidAmount e){

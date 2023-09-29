@@ -23,6 +23,5 @@ class CheckingAccount extends BankAccount {
             System.out.println("Invalid Amount Exception");
             e.printBuisnessError();
                                 }
-
-                             }
+    }
 }
