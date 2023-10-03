@@ -5,7 +5,7 @@ package com.acabes.assignment.gokulassignment.Sept29.bankaccount;
 import java.util.Scanner;
 
 public class Account {                                  /*Main_Account_Class*/
-    public static void main(String[] args) {
+    public  void makePayments() {
         Scanner scanner = new Scanner(System.in);
         char inputcheck;
 

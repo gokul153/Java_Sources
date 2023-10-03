@@ -2,6 +2,7 @@ package com.acabes.assignment.gokulassignment.Sept29.flightbooking_Bank.flightbo
 
 
 
+import com.acabes.assignment.gokulassignment.Sept29.bankaccount.Account;
 import com.acabes.assignment.gokulassignment.Sept29.flightadmin.FlightAdmin;
 
 
@@ -19,7 +20,7 @@ public class FlightBooking {
         FlightAdmin faadmin=null;
         System.out.println("Enter admin Setting press A/a or any other key to book ticket");
         input_intial1 = sc.next().charAt(0);
-
+        Account ac=new Account();
         if (input_intial1 == 'a' || input_intial1 == 'A') {
             do {
               //  FlightAdmin faadmin1 = new FlightAdmin(101, 50);
@@ -55,6 +56,8 @@ public class FlightBooking {
                 System.out.println("flightnumber is" + flight_number);
 
                 ft.bookSeat(no_of_seat, flight_number);
+                System.out.println("Make Payment !");
+                ac.makePayments();
                 System.out.println("Remaining Seat");
                 ft.getseat(flight_number);
                 System.out.println("Do want to cancel the ticket press c");
